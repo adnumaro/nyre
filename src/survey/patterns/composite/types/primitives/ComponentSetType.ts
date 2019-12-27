@@ -7,7 +7,7 @@ function arrayElementsInstanceOfComponent (input: unknown | any): boolean {
   return Array.isArray(input) && input.filter((component: any) => component instanceof Component).length === input.length
 }
 
-export default function SetType (type: string) {
+export default function ComponentSetType (type: string) {
   return new t.Type<Component[], Component[], unknown>(
     type,
     (input: unknown): input is Component[] => arrayElementsInstanceOfComponent(input),

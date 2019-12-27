@@ -2,9 +2,9 @@
 import * as t from 'io-ts'
 
 import ValidationType from './ValidationType'
-import SetType from './primitives/SetType'
+import ComponentSetType from './primitives/ComponentSetType'
 
-const Type = SetType('Elements')
+const Type = ComponentSetType('Elements')
 
 type ElementsType = t.TypeOf<typeof Type>
 
