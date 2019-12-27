@@ -6,11 +6,11 @@ const PATTERN = (extensions: string[] = []) => {
   let ext = extensions.filter((extension: string) => extension).join('|').trim()
 
   return new RegExp(
-    '^(https?:\/\/)?' + // protocol
-    '((([a-z\d]([a-z\d-]*[a-z\d])*)\.)+[a-z]{2,}|' + // Domain name
-    '((\d{1,3}\.){3}\d{1,3}))' +                     // Or IP (v4) address
-    '(\:\d+)?(\/[-a-z\d%_.~+]*)*' +                  // Port and path
-    `[^>](${ext})$`,                                 // Extensions allowed
+    '^(http[s]?:\/\/)?'                                  + // Protocol
+    '(([a-z\d]+).?([a-z\d]+)?(.[a-z\d]{2,})?([a-z\d]*)|' + // Domain name or
+    '([\d]{1,3}\.){3}[\d]{1,3})'                         + // IP (v4) address
+    '([a-z0-9%_~\+-\/]*)'                                + // File extensions
+    `.(${ext})$`,
     'i'
   )
 }
