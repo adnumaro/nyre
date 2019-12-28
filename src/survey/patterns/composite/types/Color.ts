@@ -1,14 +1,13 @@
 // @ts-ignore
 import * as t from 'io-ts'
 
-import StringType from './primitives/StringType'
+import ColorType from './primitives/ColorType'
 import ValidationType from './ValidationType'
 
-const Type = StringType('Color')
+const Type = ColorType('Color')
 
 type ColorType = t.TypeOf<typeof Type>
 
-// TODO: Validate correctly Color (in hex or rgb)
 export default class Color extends ValidationType {
   public value: ColorType
 
