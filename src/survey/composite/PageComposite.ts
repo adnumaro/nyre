@@ -1,61 +1,64 @@
-import { Component } from './Component'
-import { CompositeTypes, Name, Title, Elements } from './types/index'
+import { Component } from "@/shared/composite/Component";
+import { Name, Title } from "@/shared/types/index";
 
-export default class PageComposite extends Component {
-  protected type: CompositeTypes = CompositeTypes.PAGE
+import { CompositeEnum, LeafEnum } from "@/survey/composite/Enums";
+import Elements from "@/survey/composite/types/Elements";
 
-  protected name!: Name
-  protected title!: Title
-  protected elements!: Elements
+export default class PageComposite extends Component<CompositeEnum, LeafEnum> {
+  protected type: CompositeEnum = CompositeEnum.PAGE;
 
-  constructor (
+  protected name!: Name;
+  protected title!: Title;
+  protected elements!: Elements;
+
+  constructor(
     fields?: {
       name?: string,
       title?: string,
-      elements?: any
+      elements?: any,
     }) {
-    super()
+    super();
 
-    this.parseJson(fields)
+    this.parseJson(fields);
   }
 
-  public add (component: Component): void {
-    this.elements.value.add(component)
+  public add(component: Component<CompositeEnum, LeafEnum>): void {
+    this.elements.value.add(component);
 
-    component.setParent(this)
+    component.setParent(this);
   }
 
-  public remove (component: Component): void {
-    this.elements.value.delete(component)
+  public remove(component: Component<CompositeEnum, LeafEnum>): void {
+    this.elements.value.delete(component);
 
-    component.setParent(null)
+    component.setParent(null);
   }
 
-  parseJson (
+  public parseJson(
     fields?: {
       name?: string,
       title?: string,
-      elements?: any
+      elements?: any,
     }): PageComposite {
-    this.name = new Name(fields?.name || '')
-    this.title = new Title(fields?.title || '')
-    this.elements = new Elements(fields?.elements || [])
+    this.name = new Name(fields?.name || "");
+    this.title = new Title(fields?.title || "");
+    this.elements = new Elements(fields?.elements || []);
 
-    return this
+    return this;
   }
 
-  toJson (): Object {
-    const elements = []
+  public toJson(): object {
+    const elements = [];
 
     for (const element of this.elements.value) {
-      elements.push(element.toJson())
+      elements.push(element.toJson());
     }
 
     return {
-      type: this.type.toString(),
+      elements,
       name: this.name.value,
       title: this.title.value,
-      elements
-    }
+      type: this.type.toString(),
+    };
   }
 }

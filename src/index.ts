@@ -1,3 +1,26 @@
-import Tree from './survey/patterns/composite/Tree'
+import IConfig from "@/IConfig";
+import Tree from "@/shared/composite/Tree";
+import SurveyComposite from "@/survey/composite/index";
 
-export default Tree
+const defaultConfig = {
+  survey: {
+    compositeMap: SurveyComposite.DefaultConfig,
+  },
+};
+
+export {
+  SurveyComposite,
+};
+
+export default class Nyre {
+  public SurveyBuilder: Tree = new Tree();
+
+  constructor(config: IConfig | undefined) {
+    const globalConfig = {
+      ...defaultConfig,
+      ...config,
+    };
+
+    this.SurveyBuilder.setConfig(globalConfig.survey);
+  }
+}

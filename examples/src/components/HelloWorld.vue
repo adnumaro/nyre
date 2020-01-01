@@ -121,8 +121,6 @@
 </template>
 
 <script>
-import SurveyBuilder from 'nyre'
-
 export default {
   name: 'HelloWorld',
   props: {
@@ -130,11 +128,12 @@ export default {
   },
 
   mounted () {
-    const tree = SurveyBuilder
+    const tree = this.$nyre.SurveyBuilder
       .fromJson(
         {
           type: 'pages',
           backgroundImage: 'https://198.162.200.4/wp-content/uploads/2017/11/star-wars-the-last-jedi-millenium-falcon-image.jpg',
+          backgroundColor: 'rgba( 255 , 255 , 255 ,.1 )',
           elements: [{
             name: 'page1',
             type: 'page',
@@ -142,13 +141,7 @@ export default {
               name: 'tienes_un_seat',
               type: 'radiobutton',
               title: '¿Tienes un Seat?',
-              choices: [{
-                key: 'true',
-                value: 'Si'
-              }, {
-                key: 'false',
-                value: 'No'
-              }],
+              choices: [],
               isRequired: true
             }, {
               name: 'Modelo',
@@ -177,8 +170,8 @@ export default {
                 key: 'Mii',
                 value: 'Modelos Mii'
               }, {
-                value: 'Modelos TGI',
-                key: 'TGI'
+                key: 'TGI',
+                value: 'Modelos TGI'
               }, {
                 key: 'other',
                 value: 'otro'

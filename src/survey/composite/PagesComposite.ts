@@ -1,76 +1,79 @@
-import { Component } from './Component'
-import { CompositeTypes, Name, Title, ImageUrl, Color, Elements } from './types/index'
+import { Component } from "@/shared/composite/Component";
+import { Color, ImageUrl, Name, Title } from "@/shared/types/index";
 
-export default class PagesComposite extends Component {
-  protected type: CompositeTypes = CompositeTypes.PAGES
+import { CompositeEnum, LeafEnum } from "@/survey/composite/Enums";
+import Elements from "@/survey/composite/types/Elements";
 
-  protected name!: Name
-  protected title!: Title
-  protected headerImage!: ImageUrl
-  protected backgroundColor!: Color
-  protected backgroundImage!: ImageUrl
-  protected elements!: Elements
+export default class PagesComposite extends Component<CompositeEnum, LeafEnum> {
+  protected type: CompositeEnum = CompositeEnum.PAGES;
 
-  constructor (
+  protected name!: Name;
+  protected title!: Title;
+  protected headerImage!: ImageUrl;
+  protected backgroundColor!: Color;
+  protected backgroundImage!: ImageUrl;
+  protected elements!: Elements;
+
+  constructor(
     fields?: {
       name?: string,
       title?: string,
       headerImage?: string,
       backgroundColor?: string,
       backgroundImage?: string,
-      elements?: any
+      elements?: any,
     }) {
-    super()
+    super();
 
-    this.parseJson(fields)
+    this.parseJson(fields);
   }
 
-  public add (component: Component): void {
-    this.elements.value.add(component)
+  public add(component: Component<CompositeEnum, LeafEnum>): void {
+    this.elements.value.add(component);
 
-    component.setParent(this)
+    component.setParent(this);
   }
 
-  public remove (component: Component): void {
-    this.elements.value.delete(component)
+  public remove(component: Component<CompositeEnum, LeafEnum>): void {
+    this.elements.value.delete(component);
 
-    component.setParent(null)
+    component.setParent(null);
   }
 
-  parseJson (
+  public parseJson(
     fields?: {
       name?: string,
       title?: string,
       headerImage?: string,
       backgroundColor?: string,
       backgroundImage?: string,
-      elements?: any
+      elements?: any,
     }): PagesComposite {
-    this.name = new Name(fields?.name || '')
-    this.title = new Title(fields?.title || '')
-    this.headerImage = new ImageUrl(fields?.headerImage || '')
-    this.backgroundColor = new Color(fields?.backgroundColor || '')
-    this.backgroundImage = new ImageUrl(fields?.backgroundImage || '')
-    this.elements = new Elements(fields?.elements || [])
+    this.name = new Name(fields?.name || "");
+    this.title = new Title(fields?.title || "");
+    this.headerImage = new ImageUrl(fields?.headerImage || "");
+    this.backgroundColor = new Color(fields?.backgroundColor || "");
+    this.backgroundImage = new ImageUrl(fields?.backgroundImage || "");
+    this.elements = new Elements(fields?.elements || []);
 
-    return this
+    return this;
   }
 
-  toJson (): Object {
-    const elements = []
+  public toJson(): object {
+    const elements = [];
 
     for (const element of this.elements.value) {
-      elements.push(element.toJson())
+      elements.push(element.toJson());
     }
 
     return {
-      type: this.type.toString(),
-      name: this.name.value,
-      title: this.title.value,
-      headerImage: this.headerImage.value,
       backgroundColor: this.backgroundColor.value,
       backgroundImage: this.backgroundImage.value,
-      elements
-    }
+      elements,
+      headerImage: this.headerImage.value,
+      name: this.name.value,
+      title: this.title.value,
+      type: this.type.toString(),
+    };
   }
 }
