@@ -5,6 +5,8 @@ import PanelComposite from './PanelComposite'
 import RadiobuttomLeaf from './RadiobuttomLeaf'
 import TextLeaf from './TextLeaf'
 
+import _ from 'lodash'
+
 import { ObjectMapType } from './Errors'
 
 type ObjectMap = {
@@ -31,13 +33,13 @@ export default class Tree {
       self.compositeMap.hasOwnProperty(json.type)
     ) {
       if (json.hasOwnProperty('elements')) {
-        const elements = [...json.elements]
+        const elements = _.clone(json.elements)
 
         delete json.elements
 
         baseTree = new self.compositeMap[json.type]().parseJson(json)
 
-        elements.forEach(element => {
+        elements.forEach((element: any) => {
           baseTree.add(Tree.fromJson(element))
         })
       } else {

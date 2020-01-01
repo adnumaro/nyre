@@ -47,8 +47,8 @@ export default class PageComposite extends Component {
   toJson (): Object {
     const elements = []
 
-    for (const component of this.elements.value) {
-      elements.push(component.toJson())
+    for (const element of this.elements.value) {
+      elements.push(element.toJson())
     }
 
     return {

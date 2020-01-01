@@ -7,11 +7,9 @@ export default abstract class ValidationType {
     ValidationType.ownType = type
   }
 
-  static validate (value: string) {
+  static validate (value: any) {
     let result = ValidationType.ownType.decode(value)
-    let errors = []
-
-    errors.push(errorReporter(result)[0])
+    let errors = errorReporter(result)
 
     if (errors.filter(error => error).length === 0) {
       return true
