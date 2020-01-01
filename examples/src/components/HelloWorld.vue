@@ -133,7 +133,7 @@ export default {
         {
           type: 'pages',
           backgroundImage: 'https://198.162.200.4/wp-content/uploads/2017/11/star-wars-the-last-jedi-millenium-falcon-image.jpg',
-          backgroundColor: 'rgba( 255 , 255 , 255 ,.1 )',
+          backgroundColor: 'rgb( 255 , 255 , 255 )',
           elements: [{
             name: 'page1',
             type: 'page',
@@ -141,7 +141,7 @@ export default {
               name: 'tienes_un_seat',
               type: 'radiobutton',
               title: '¿Tienes un Seat?',
-              choices: [],
+              choices: [{key: '', value: ''}],
               isRequired: true
             }, {
               name: 'Modelo',

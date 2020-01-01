@@ -15,10 +15,11 @@ const PATTERN = (extensions: string[] = []) => {
   );
 };
 
-export default function urlType(type: string, extensions: string[] = []) {
+export default function urlType(type: string, extensions?: string[]) {
   return new t.Type<string, string, unknown>(
     type,
-    (input: unknown): input is string => typeof input === "string" && (PATTERN(extensions).test(input) || !input),
+    (input: unknown): input is string => typeof input === "string" &&
+      (PATTERN(extensions).test(input) || !input),
     (input: any, context: any) => (
       typeof input === "string" && (PATTERN(extensions).test(input) || !input)
         ? t.success(input)

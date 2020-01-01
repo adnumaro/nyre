@@ -1,7 +1,7 @@
 import _ from "lodash";
 
 import { ITree } from "@/IConfig";
-import { ObjectMapType } from "@/shared/types/ObjectMap";
+import { ObjectMapType } from "@/shared/types/base/ObjectMap";
 
 interface IObjectMap {
   [key: string]: any;

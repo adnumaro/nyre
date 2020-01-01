@@ -27,14 +27,35 @@ const HSLA = "hsla\\(\\s*" +
   "(,\\s*(0?\\.\\d+|1))" +
   "\\s*\\)";
 
-const PATTERN = new RegExp(`^(${HEX}|${RGB}|${RGBA}|${HSL}|${HSLA})$`, "i");
+const color: {
+  [key: string]: string,
+} = {
+  hex: HEX,
+  rgb: RGB,
+  rgba: RGBA,
+  hsl: HSL,
+  hsla: HSLA,
+};
 
-export default function colorType(type: string) {
+const PATTERN = (typesAllowed: string[] = []) => {
+  const allowed = typesAllowed.length > 0
+    ? typesAllowed
+        .map((type: string) => color[type])
+        .filter((type: any) => type)
+        .join("|")
+        .trim()
+    : `${HEX}|${RGB}|${RGBA}|${HSL}|${HSLA}`;
+
+  return new RegExp(`^(${allowed})$`, "i");
+};
+
+export default function colorType(type: string, typesAllowed?: string[]) {
   return new t.Type<string, string, unknown>(
     type,
-    (input: unknown): input is string => typeof input === "string" && (PATTERN.test(input) || !input),
+    (input: unknown): input is string => typeof input === "string" &&
+      (PATTERN(typesAllowed).test(input) || !input),
     (input: any, context: any) => (
-      typeof input === "string" && (PATTERN.test(input) || !input)
+      typeof input === "string" && (PATTERN(typesAllowed).test(input) || !input)
         ? t.success(input)
         : t.failure(input, context, `Type error: ${type} has invalid representation => ${input}`)
     ),
