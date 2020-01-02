@@ -22,17 +22,12 @@ export default class Tree {
 
         delete json.elements;
 
-        console.log("if, type", json.type);
-
         baseTree = new this.compositeMap[json.type](json);
 
         elements.forEach((element: any) => {
           baseTree.add(this.fromJson(element));
         });
       } else {
-        console.log("else, type", json.type);
-        console.log("else, json", json);
-
         baseTree = new this.compositeMap[json.type](json);
       }
 

@@ -9,8 +9,6 @@ type KeyValueMap = {
 };
 
 function isArrayOfKeyValueMap(input: unknown | any | KeyValueMap[]): boolean {
-  console.log("isArrayOfKeyValueMap input", input);
-
   return Array.isArray(input) &&
     input.filter((element: any) =>
       (element.hasOwnProperty("key") && getTypeOf(element.key) === "String") &&

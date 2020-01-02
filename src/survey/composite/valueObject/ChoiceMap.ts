@@ -14,8 +14,6 @@ export default class ChoiceMap extends ValidationType {
   constructor(value: any) {
     super(Type);
 
-    console.log("ChoiceMap value", value);
-
     if (ChoiceMap.VALIDATE(value)) {
       this.value = value;
     }
