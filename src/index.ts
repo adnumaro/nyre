@@ -1,5 +1,7 @@
 import IConfig from "@/IConfig";
+
 import Tree from "@/shared/composite/Tree";
+
 import SurveyComposite from "@/survey/composite/index";
 
 const defaultConfig = {

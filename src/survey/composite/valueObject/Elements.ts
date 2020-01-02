@@ -4,6 +4,7 @@ import * as t from "io-ts";
 import { Component } from "@/shared/composite/Component";
 import setType from "@/shared/types/setType";
 import ValidationType from "@/shared/ValidationType";
+
 import { CompositeEnum, LeafEnum } from "@/survey/composite/Enums";
 
 const Type = setType<Component<CompositeEnum, LeafEnum>>("Elements");
