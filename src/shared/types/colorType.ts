@@ -4,6 +4,7 @@ import * as t from "io-ts";
 // https://stackoverflow.com/questions/43706082/validation-hex-and-rgba-colors-using-regex-in-php
 // https://regex101.com/r/A2IjNO/4
 const HEX = "\\#[\\da-f]{3}|\\#[\\da-f]{6}";
+
 const RGB = "rgb\\(\\s*" +
   "(\\d{1,2}|1\\d\\d|2([0-4]\\d|5[0-5]))\\s*," +
   "\\s*(\\d{1,2}|1\\d\\d|2([0-4]\\d|5[0-5]))\\s*," +
@@ -31,10 +32,10 @@ const color: {
   [key: string]: string,
 } = {
   hex: HEX,
-  rgb: RGB,
-  rgba: RGBA,
   hsl: HSL,
   hsla: HSLA,
+  rgb: RGB,
+  rgba: RGBA,
 };
 
 const PATTERN = (typesAllowed: string[] = []) => {
