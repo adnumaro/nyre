@@ -26,7 +26,7 @@ export default class TextLeaf extends Component<CompositeEnum, LeafEnum> {
   public parseJson(jsonFields: JSONFields): TextLeaf {
     this.name = new Name(jsonFields.name || "");
     this.rules = new Rules(jsonFields.rules || {});
-    this.title = new Title(jsonFields?.title || "");
+    this.title = new Title(jsonFields.title || "");
 
     return this;
   }

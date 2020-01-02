@@ -36,9 +36,9 @@ export default class PanelComposite extends Component<CompositeEnum, LeafEnum> {
   }
 
   public parseJson(jsonFields: JSONFields): PanelComposite {
-    this.elements = new Elements(jsonFields?.elements || []);
-    this.name = new Name(jsonFields?.name || "");
-    this.title = new Title(jsonFields?.title || "");
+    this.elements = new Elements(jsonFields.elements || []);
+    this.name = new Name(jsonFields.name || "");
+    this.title = new Title(jsonFields.title || "");
 
     return this;
   }
