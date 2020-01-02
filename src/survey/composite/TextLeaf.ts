@@ -40,9 +40,11 @@ export default class TextLeaf extends Component<CompositeEnum, LeafEnum> {
     };
   }
 
-  // tslint:disable-next-line: no-empty
-  public add(): void {}
+  public add(): void {
+    throw new Error("Leaf cannot add elements");
+  }
 
-  // tslint:disable-next-line: no-empty
-  public remove(): void {}
+  public remove(): void {
+    throw new Error("Leaf cannot remove elements");
+  }
 }
