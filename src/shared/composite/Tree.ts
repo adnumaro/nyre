@@ -1,7 +1,7 @@
 import _ from "lodash";
 
 import { ITree } from "@/IConfig";
-import { ObjectMapType } from "@/shared/types/base/ObjectMap";
+import { ObjectMapType } from "@/shared/types/ObjectMap";
 
 interface IObjectMap {
   [key: string]: any;
@@ -22,13 +22,18 @@ export default class Tree {
 
         delete json.elements;
 
-        baseTree = new this.compositeMap[json.type]().parseJson(json);
+        console.log("if, type", json.type);
+
+        baseTree = new this.compositeMap[json.type](json);
 
         elements.forEach((element: any) => {
           baseTree.add(this.fromJson(element));
         });
       } else {
-        baseTree = new this.compositeMap[json.type]().parseJson(json);
+        console.log("else, type", json.type);
+        console.log("else, json", json);
+
+        baseTree = new this.compositeMap[json.type](json);
       }
 
       return baseTree;

@@ -1,7 +1,7 @@
 // @ts-ignore
 import * as t from "io-ts";
 
-import colorType from "@/shared/types/base/colorType";
+import colorType from "@/shared/types/colorType";
 import ValidationType from "@/shared/ValidationType";
 
 const Type = colorType("Color");

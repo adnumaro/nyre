@@ -1,6 +1,14 @@
 import { Component } from "@/shared/composite/Component";
-import { Name, Rules, Title } from "@/shared/types/index";
+import { Name, Title } from "@/shared/valueObject/index";
+
 import { CompositeEnum, LeafEnum } from "@/survey/composite/Enums";
+import Rules from "@/survey/composite/valueObject/Rules";
+
+type JSONFields = {
+  name?: string,
+  title?: string,
+  rules?: any,
+};
 
 export default class TextLeaf extends Component<CompositeEnum, LeafEnum> {
   protected type: LeafEnum = LeafEnum.TEXT;
@@ -9,25 +17,16 @@ export default class TextLeaf extends Component<CompositeEnum, LeafEnum> {
   protected title!: Title;
   protected rules!: Rules;
 
-  constructor(
-    fields?: {
-      name?: string,
-      title?: string,
-      rules?: any,
-    }) {
+  constructor(jsonFields: JSONFields) {
     super();
 
-    this.parseJson(fields);
+    this.parseJson(jsonFields);
   }
 
-  public parseJson(fields?: {
-    name?: string,
-    title?: string,
-    rules?: {},
-  }): TextLeaf {
-    this.name = new Name(fields?.name || "");
-    this.title = new Title(fields?.title || "");
-    this.rules = new Rules(fields?.rules || {});
+  public parseJson(jsonFields: JSONFields): TextLeaf {
+    this.name = new Name(jsonFields.name || "");
+    this.rules = new Rules(jsonFields.rules || {});
+    this.title = new Title(jsonFields?.title || "");
 
     return this;
   }

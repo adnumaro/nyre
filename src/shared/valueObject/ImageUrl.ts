@@ -1,7 +1,7 @@
 // @ts-ignore
 import * as t from "io-ts";
 
-import urlType from "@/shared/types/base/urlType";
+import urlType from "@/shared/types/urlType";
 import ValidationType from "@/shared/ValidationType";
 
 const Type = urlType("ImageUrl", [".jpg", ".jpeg", ".png", ".gif"]);

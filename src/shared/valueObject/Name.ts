@@ -1,7 +1,7 @@
 // @ts-ignore
 import * as t from "io-ts";
 
-import stringType from "@/shared/types/base/stringType";
+import stringType from "@/shared/types/stringType";
 import ValidationType from "@/shared/ValidationType";
 
 const Type = stringType("Name");

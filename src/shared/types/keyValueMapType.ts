@@ -9,11 +9,13 @@ type KeyValueMap = {
 };
 
 function isArrayOfKeyValueMap(input: unknown | any | KeyValueMap[]): boolean {
+  console.log("isArrayOfKeyValueMap input", input);
+
   return Array.isArray(input) &&
-    (input.filter((element: any) =>
+    input.filter((element: any) =>
       (element.hasOwnProperty("key") && getTypeOf(element.key) === "String") &&
       (element.hasOwnProperty("value") && getTypeOf(element.value) === "String"),
-    ).length > 0 || input.length === 0);
+    ).length > 0;
 }
 
 export default function keyValueMapType(type: string) {

@@ -1,8 +1,17 @@
 import { Component } from "@/shared/composite/Component";
-import { Color, ImageUrl, Name, Title } from "@/shared/types/index";
+import { Color, ImageUrl, Name, Title } from "@/shared/valueObject/index";
 
 import { CompositeEnum, LeafEnum } from "@/survey/composite/Enums";
-import Elements from "@/survey/composite/types/Elements";
+import Elements from "@/survey/composite/valueObject/Elements";
+
+type JSONFields = {
+  name?: string,
+  title?: string,
+  headerImage?: string,
+  backgroundColor?: string,
+  backgroundImage?: string,
+  elements?: any,
+};
 
 export default class PagesComposite extends Component<CompositeEnum, LeafEnum> {
   protected type: CompositeEnum = CompositeEnum.PAGES;
@@ -14,18 +23,10 @@ export default class PagesComposite extends Component<CompositeEnum, LeafEnum> {
   protected backgroundImage!: ImageUrl;
   protected elements!: Elements;
 
-  constructor(
-    fields?: {
-      name?: string,
-      title?: string,
-      headerImage?: string,
-      backgroundColor?: string,
-      backgroundImage?: string,
-      elements?: any,
-    }) {
+  constructor(jsonFields: JSONFields) {
     super();
 
-    this.parseJson(fields);
+    this.parseJson(jsonFields);
   }
 
   public add(component: Component<CompositeEnum, LeafEnum>): void {
@@ -40,21 +41,13 @@ export default class PagesComposite extends Component<CompositeEnum, LeafEnum> {
     component.setParent(null);
   }
 
-  public parseJson(
-    fields?: {
-      name?: string,
-      title?: string,
-      headerImage?: string,
-      backgroundColor?: string,
-      backgroundImage?: string,
-      elements?: any,
-    }): PagesComposite {
-    this.name = new Name(fields?.name || "");
-    this.title = new Title(fields?.title || "");
-    this.headerImage = new ImageUrl(fields?.headerImage || "");
-    this.backgroundColor = new Color(fields?.backgroundColor || "");
-    this.backgroundImage = new ImageUrl(fields?.backgroundImage || "");
-    this.elements = new Elements(fields?.elements || []);
+  public parseJson(jsonFields: JSONFields): PagesComposite {
+    this.backgroundColor = new Color(jsonFields.backgroundColor || "");
+    this.backgroundImage = new ImageUrl(jsonFields.backgroundImage || "");
+    this.elements = new Elements(jsonFields.elements || []);
+    this.headerImage = new ImageUrl(jsonFields.headerImage || "");
+    this.name = new Name(jsonFields.name || "");
+    this.title = new Title(jsonFields.title || "");
 
     return this;
   }

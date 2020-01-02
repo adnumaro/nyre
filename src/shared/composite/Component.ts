@@ -1,4 +1,4 @@
-import { ObjectMapType } from "@/shared/types/base/ObjectMap";
+import { ObjectMapType } from "@/shared/types/ObjectMap";
 
 export abstract class Component<C, L> {
   protected abstract type: C | L;

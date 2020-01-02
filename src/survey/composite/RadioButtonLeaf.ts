@@ -1,8 +1,16 @@
 import { Component } from "@/shared/composite/Component";
-import { Name, Rules, Title } from "@/shared/types/index";
+import { Name, Title } from "@/shared/valueObject/index";
 
 import { CompositeEnum, LeafEnum } from "@/survey/composite/Enums";
-import ChoiceMap from "@/survey/composite/types/ChoiceMap";
+import ChoiceMap from "@/survey/composite/valueObject/ChoiceMap";
+import Rules from "@/survey/composite/valueObject/Rules";
+
+type JSONFields = {
+  name?: string,
+  title?: string,
+  choices?: any,
+  rules?: any,
+};
 
 export default class RadioButtonLeaf extends Component<CompositeEnum, LeafEnum> {
   protected type: LeafEnum = LeafEnum.RADIO_BUTTON;
@@ -12,28 +20,17 @@ export default class RadioButtonLeaf extends Component<CompositeEnum, LeafEnum> 
   protected choices!: ChoiceMap;
   protected rules!: Rules;
 
-  constructor(
-    fields?: {
-      name?: string,
-      title?: string,
-      choices?: any,
-      rules?: any,
-    }) {
+  constructor(jsonFields: JSONFields) {
     super();
 
-    this.parseJson(fields);
+    this.parseJson(jsonFields);
   }
 
-  public parseJson(fields?: {
-    name?: string,
-    title?: string,
-    choices?: any,
-    rules?: string,
-  }): RadioButtonLeaf {
-    this.name = new Name(fields?.name || "");
-    this.title = new Title(fields?.title || "");
-    this.choices = new ChoiceMap(fields?.choices || []);
-    this.rules = new Rules(fields?.rules || {});
+  public parseJson(jsonFields: JSONFields): RadioButtonLeaf {
+    this.choices = new ChoiceMap(jsonFields.choices || []);
+    this.name = new Name(jsonFields.name || "");
+    this.rules = new Rules(jsonFields.rules || {});
+    this.title = new Title(jsonFields.title || "");
 
     return this;
   }
