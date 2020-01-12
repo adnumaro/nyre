@@ -1,7 +1,7 @@
-import { ObjectMapType } from "@/shared/types/ObjectMap";
+import ObjectMapIO from "@/shared/types/ObjectMapIO";
 
-export abstract class Component<C, L> {
-  protected abstract type: C | L;
+export default abstract class Component<C, L> {
+  protected abstract readonly type: C | L;
 
   protected parent: Component<C, L> | null = null;
 
@@ -19,7 +19,7 @@ export abstract class Component<C, L> {
 
   public abstract toJson(): object;
 
-  public abstract parseJson(json: ObjectMapType): Component<C, L>;
+  public abstract parseJson(json: ObjectMapIO): Component<C, L>;
 
   public toString(): string {
     return JSON.stringify(this.toJson());

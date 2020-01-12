@@ -4,15 +4,15 @@
         "tslint:recommended",
         "tslint-microsoft-contrib/recommended"
     ],
-    "jsRules": {},
+    "rulesDirectory": [
+        "node_modules/tslint-microsoft-contrib"
+    ],
     "rules": {
         "no-console": false,
         "import-name": false,
         "export-name": false,
         "prefer-type-cast": false,
-        "interface-over-type-literal": false
-    },
-    "rulesDirectory": [
-        "node_modules/tslint-microsoft-contrib"
-    ]
+        "interface-over-type-literal": false,
+        "prefer-array-literal": [true, { "allow-type-parameters": true }]
+    }
 }

@@ -1,7 +1,7 @@
 // @ts-ignore
 import * as t from "io-ts";
 
-import keyValueMapType from "@/shared/types/keyValueMapType";
+import keyValueMapType from "@/shared/typesConstructor/keyValueMapType";
 import ValidationType from "@/shared/ValidationType";
 
 const Type = keyValueMapType("ChoiceMap");

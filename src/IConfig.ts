@@ -1,7 +1,8 @@
-export interface ITree {
-  compositeMap: {};
+export declare interface ISurvey {
+  compositeMap?: {};
+  commandMap?: {};
 }
 
-export default interface IConfig {
-  survey: ITree;
+export declare interface IConfig {
+  survey: ISurvey;
 }

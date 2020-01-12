@@ -1,4 +1,4 @@
-import { Component } from "@/shared/composite/Component";
+import Component from "@/shared/composite/Component";
 import { Name, Title } from "@/shared/valueObject/index";
 
 import { CompositeEnum, LeafEnum } from "@/survey/composite/Enums";

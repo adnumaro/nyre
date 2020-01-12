@@ -1,21 +1,25 @@
-import IConfig from "@/IConfig";
+import { IConfig } from "@/IConfig";
 
-import Tree from "@/shared/composite/Tree";
+import Survey from "@/survey/index";
 
+import SurveyCommand from "@/survey/command/index";
 import SurveyComposite from "@/survey/composite/index";
 
 const defaultConfig = {
   survey: {
+    commandMap: SurveyCommand.DefaultConfig,
     compositeMap: SurveyComposite.DefaultConfig,
+    context: Survey,
   },
 };
 
 export {
   SurveyComposite,
+  SurveyCommand,
 };
 
 export default class Nyre {
-  public SurveyBuilder: Tree = new Tree();
+  public survey: Survey;
 
   constructor(config: IConfig | undefined) {
     const globalConfig = {
@@ -23,6 +27,6 @@ export default class Nyre {
       ...config,
     };
 
-    this.SurveyBuilder.setConfig(globalConfig.survey);
+    this.survey = new Survey(globalConfig.survey);
   }
 }
