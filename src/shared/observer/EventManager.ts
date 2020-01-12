@@ -3,7 +3,6 @@ import Subject from "@/shared/observer/Subject";
 
 import Notifier from "@/shared/observer/types/Notifier";
 import Observers from "@/shared/observer/types/Observers";
-import Payload from "@/shared/observer/types/Payload";
 
 export default class EventManager extends Subject {
   private observers: Observers = {};
@@ -34,9 +33,7 @@ export default class EventManager extends Subject {
     const notified: Notifier[] = [];
 
     observers.forEach((observer: Observer) => {
-      const payload: Payload = { data, eventType };
-
-      observer.update(context, payload);
+      observer.update(context, eventType, data);
       notified.push({ data, eventType, observer });
     });
 

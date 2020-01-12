@@ -1,18 +1,20 @@
 import _ from "lodash";
 
+import Component from "@/shared/composite/Component";
 import ObjectMap from "@/shared/types/ObjectMap";
 import ObjectMapIO from "@/shared/types/ObjectMapIO";
+import { CompositeEnum, LeafEnum } from "@/survey/composite/Enums";
 
 export default class TreeFactory {
-  public baseTree: any;
+  public baseTree: Component<CompositeEnum, LeafEnum> | undefined;
   private compositeMap: ObjectMap = {};
 
   constructor(config: ObjectMap) {
     this.compositeMap = config;
   }
 
-  public setTreeContent(json: ObjectMapIO) {
-    this.baseTree = this.parseJson(json);
+  public setTreeContent(json: ObjectMapIO): void {
+    this.baseTree = this.parseJson(_.cloneDeep(json));
   }
 
   public parseJson(json: ObjectMapIO): any {
@@ -23,7 +25,7 @@ export default class TreeFactory {
       this.compositeMap.hasOwnProperty(json.type)
     ) {
       if (json.hasOwnProperty("elements")) {
-        const elements = _.clone(json.elements);
+        const elements = _.cloneDeep(json.elements);
 
         delete json.elements;
 

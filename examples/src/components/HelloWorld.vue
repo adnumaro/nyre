@@ -1,102 +1,120 @@
 <template>
   <div class="hello">
+    <button @click="undo">Undo</button>
+    <button @click="addContent1">Add Content 1</button>
+    <button @click="addContent2">Add Content 2</button>
+    <button @click="addContent3">Add Content 3</button>
+
+    <div style="margin-top: 50px;text-align: left;">
+      <pre>
+        <code>
+          {{ tree }}
+        </code>
+      </pre>
+    </div>
   </div>
 </template>
 
 <script>
+import { undefined } from 'io-ts'
 export default {
   name: 'HelloWorld',
 
-  mounted () {
-    const content1 = {
-      type: 'pages',
-      backgroundImage: 'https://198.162.200.4/wp-content/uploads/2017/11/star-wars-the-last-jedi-millenium-falcon-image.jpg',
-      backgroundColor: 'rgb( 255, 255,255)',
-      elements: [{
-        name: 'page1',
-        type: 'page',
-        elements: [{
-          name: 'tienes_un_seat',
-          type: 'radiobutton',
-          title: '¿Tienes un Seat?',
-          choices: [{
-            key: 'Key',
-            value: 'Value'
-          }]
-        }]
-      }]
+  data () {
+    return {
+      tree: {}
     }
+  },
 
-    const content2 = {
-      type: 'pages',
-      backgroundImage: 'https://198.162.200.4/another-image-content.png',
-      backgroundColor: 'rgb( 255, 255,255)',
-      elements: [{
-        name: 'Page 1',
-        type: 'page',
-        elements: [{
-          name: 'tienes_un_seat',
-          type: 'radiobutton',
-          title: '¿Tienes un Seat?',
-          choices: [{
-            key: 'Key',
-            value: 'Value'
-          }]
-        }]
-      }]
-    }
+  methods: {
+    addContent (content) {
+      this.$nyre.survey.notify('add-pages', content)
+      this.tree = JSON.stringify(this.$nyre.survey.getTree().toJson(), null, '\t')
 
-    const content3 = {
-      type: 'pages',
-      backgroundImage: 'https://198.162.200.4/final-image.jpeg',
-      backgroundColor: 'rgb( 255, 255,255)',
-      elements: [{
-        name: 'Page 1',
-        type: 'page',
+      console.log(this.$nyre.survey.getTree().toJson())
+    },
+
+    addContent1 () {
+      this.addContent({
+        type: 'pages',
+        backgroundImage: 'https://198.162.200.4/content-1.jpg',
+        backgroundColor: 'rgb( 255, 255,255)',
         elements: [{
-          name: 'tienes_un_seat',
-          type: 'radiobutton',
-          title: '¿Tienes un Seat?',
-          choices: [{
-            key: 'Key',
-            value: 'Value'
-          }]
-        }]
-      }, {
-        name: 'Page 2',
-        type: 'page',
-        elements: [{
-          name: 'Panel 1',
-          type: 'panel',
-          title: 'Valoración del Encuentro',
+          name: 'page1',
+          type: 'page',
           elements: [{
-            name: 'comunicacion_porque',
-            type: 'text',
-            title: '¿Por qué?'
+            name: 'tienes_un_seat',
+            type: 'radiobutton',
+            title: '¿Tienes un Seat?',
+            choices: [{
+              key: 'Key',
+              value: 'Value'
+            }]
           }]
         }]
-      }]
+      })
+    },
+
+    addContent2 () {
+      this.addContent({
+        type: 'pages',
+        backgroundImage: 'https://198.162.200.4/content-2.png',
+        backgroundColor: 'rgb( 255, 255,255)',
+        elements: [{
+          name: 'Page 1',
+          type: 'page',
+          elements: [{
+            name: 'tienes_un_seat',
+            type: 'radiobutton',
+            title: '¿Tienes un Seat?',
+            choices: [{
+              key: 'Key',
+              value: 'Value'
+            }]
+          }]
+        }]
+      })
+    },
+
+    addContent3 () {
+      this.addContent({
+        type: 'pages',
+        backgroundImage: 'https://198.162.200.4/fcontent-3.jpeg',
+        backgroundColor: 'rgb( 255, 255,255)',
+        elements: [{
+          name: 'Page 1',
+          type: 'page',
+          elements: [{
+            name: 'tienes_un_seat',
+            type: 'radiobutton',
+            title: '¿Tienes un Seat?',
+            choices: [{
+              key: 'Key',
+              value: 'Value'
+            }]
+          }]
+        }, {
+          name: 'Page 2',
+          type: 'page',
+          elements: [{
+            name: 'Panel 1',
+            type: 'panel',
+            title: 'Valoración del Encuentro',
+            elements: [{
+              name: 'comunicacion_porque',
+              type: 'text',
+              title: '¿Por qué?'
+            }]
+          }]
+        }]
+      })
+    },
+
+    undo () {
+      this.$nyre.survey.undo()
+
+      this.tree = JSON.stringify(this.$nyre.survey.getTree().toJson(), null, '\t')
     }
-
-    this.$nyre.survey.notify('add-pages', content1)
-
-    console.log('Content 1', this.$nyre.survey.getTree())
-
-    this.$nyre.survey.notify('add-pages', content2)
-
-    console.log('Content 2', this.$nyre.survey.getTree())
-
-    this.$nyre.survey.undo()
-
-    console.log('Restore Content 1', this.$nyre.survey.getTree())
-
-    this.$nyre.survey.notify('add-pages', content3)
-
-    console.log('Restore Content 3', this.$nyre.survey.getTree())
-
-    this.$nyre.survey.undo()
-
-    console.log('Restore Content 2', this.$nyre.survey.getTree())
   }
 }
 </script>

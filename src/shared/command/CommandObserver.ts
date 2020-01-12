@@ -1,6 +1,5 @@
 import Command from "@/shared/command/Command";
 import CommandOriginator from "@/shared/command/CommandOriginator";
-import Payload from "@/shared/command/types/Payload";
 import EventManager from "@/shared/observer/EventManager";
 import Observer from "@/shared/observer/Observer";
 import ObjectMap from "@/shared/types/ObjectMap";
@@ -10,8 +9,8 @@ export default class CommandObserver extends Observer {
   public readonly history: CommandOriginator = new CommandOriginator();
   private readonly commandMap: ObjectMap = {};
 
-  public update(context: any, payload: Payload): void {
-    const command: Command = new this.commandMap[payload.eventType](context, payload);
+  public update(context: any, eventType: string, data: any): void {
+    const command: Command = new this.commandMap[eventType](context, data);
 
     command.execute();
 

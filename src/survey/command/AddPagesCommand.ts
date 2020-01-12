@@ -1,27 +1,22 @@
 import Command from "@/shared/command/Command";
 import Survey from "@/survey/index";
 
-type Payload = {
-  eventType: string,
-  data: any,
-};
-
 export default class AddPagesCommand extends Command {
   private context: Survey;
-  private payload: any;
+  private data: any;
   private backup: any;
 
-  constructor(context: Survey, payload: Payload) {
+  constructor(context: Survey, data: any) {
     super();
 
     this.context = context;
-    this.payload = payload;
+    this.data = data;
   }
 
   public execute(): void {
-    this.context.parseJson(this.payload.data);
+    this.context.parseJson(this.data);
 
-    this.backup = this.payload.data;
+    this.backup = this.data;
   }
 
   public undo(): void {
