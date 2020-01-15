@@ -1,9 +1,9 @@
 import { IConfig } from "@/IConfig";
 
-import Survey from "@/survey/index";
+import Survey from "@core/survey/index";
 
-import SurveyCommand from "@/survey/command/index";
-import SurveyComposite from "@/survey/composite/index";
+import * as SurveyCommand from "@core/survey/domain/command/index";
+import * as SurveyComposite from "@core/survey/domain/composite/index";
 
 const defaultConfig = {
   survey: {

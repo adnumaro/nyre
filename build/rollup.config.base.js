@@ -23,6 +23,9 @@ export default {
             entries: [{
                 find: '@',
                 replacement: path.resolve(projectRootDir, 'src')
+            }, {
+                find: '@core',
+                replacement: path.resolve(projectRootDir, 'src/core')
             }]
         }),
         resolve({

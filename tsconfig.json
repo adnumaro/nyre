@@ -23,7 +23,8 @@
       "esnext"
     ],
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@core/*": ["src/core/*"]
     }
   },
   "include": [

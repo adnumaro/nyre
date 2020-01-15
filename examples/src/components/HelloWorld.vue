@@ -30,8 +30,6 @@ export default {
     addContent (content) {
       this.$nyre.survey.notify('add-pages', content)
       this.tree = JSON.stringify(this.$nyre.survey.getTree().toJson(), null, '\t')
-
-      console.log(this.$nyre.survey.getTree().toJson())
     },
 
     addContent1 () {
